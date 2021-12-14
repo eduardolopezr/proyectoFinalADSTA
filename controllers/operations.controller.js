@@ -1,8 +1,8 @@
 module.exports = {
     sum: function (req, res) {
 
-        var num1 = Number.req.query.num1;
-        var num2 = Number.req.query.num2;
+        var num1 = req.query("num1");
+        var num2 = req.query("num2");
 
         var result = num1+num2;
 
@@ -14,8 +14,9 @@ module.exports = {
 
     substract: function (req, res) {
 
-        var num1 = Number.req.query.num1;
-        var num2 = Number.req.query.num2;
+        var num1 = req.query("num1");
+        var num2 = req.query("num2");
+        
 
         var result = num1-num2;
 
@@ -27,8 +28,8 @@ module.exports = {
     },
 
     multiply: function (req, res) {
-        var num1 = Number.req.query.num1;
-        var num2 = Number.req.query.num2;
+        var num1 = req.query("num1");
+        var num2 = req.query("num2");
 
         var result = num1*num2;
 
@@ -40,8 +41,9 @@ module.exports = {
 
     divide: function (req, res) {
 
-        var num1 = Number.req.query.num1;
-        var num2 = Number.req.query.num2;
+        var num1 = req.query("num1");
+        var num2 = req.query("num2");
+        
         var result;
         
         (num1>0) ? result = num1/num2 : result ="No se puede dividir entre 0";
