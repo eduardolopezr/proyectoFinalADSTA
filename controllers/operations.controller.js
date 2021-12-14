@@ -16,7 +16,6 @@ module.exports = {
 
         var num1 = req.query("num1");
         var num2 = req.query("num2");
-        
 
         var result = num1-num2;
 
