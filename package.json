@@ -10,6 +10,8 @@
     "start:prod": "node app.js"
   },
   "dependencies": {
+    "@sentry/node": "^6.16.1",
+    "@sentry/tracing": "^6.16.1",
     "bluebird": "3.7.2",
     "chai": "4.2.0",
     "chai-http": "4.3.0",
