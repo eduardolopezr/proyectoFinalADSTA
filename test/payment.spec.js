@@ -59,10 +59,7 @@ describe("payment check", () => {
     });
 
     it("Should return 5 promo codes", (done) => {
-        chai
-        .request(server)
-        .get("/payment/promos")
-        .then((promos) => {
+        chai.request(server).get("/payment/promos").then((promos) => {
             promos.body.length.should.eql(5);
             done();
         });
