@@ -8,7 +8,7 @@ module.exports = {
         var nombrePersona = faker.name.findName();
         
         var response = {
-            message:"Pedido realizado...",
+            message:"Pedido realizado",
             data:{
                 address: direccionPersona,
                 name: nombrePersona,

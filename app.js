@@ -7,6 +7,8 @@ var indexRouter = require('./routes/index');
 var tasksRouter = require('./routes/tasks');
 var authRouter = require('./routes/auth');
 var paymentRouter = require('./routes/payment');
+var shipmentRouter = require("./routes/shipment");
+var operationsRouter  = require("./routes/operations");
 
 var app = express();
 
@@ -23,6 +25,9 @@ app.use('/auth', authRouter);
 app.use('/', indexRouter);
 app.use('/tasks', tasksRouter);
 app.use('/payment', paymentRouter);
-
-
+app.use('/shipment', shipmentRouter);
+app.use('/operations', operationsRouter);
+app.listen(process.env.PORT || 8001, function () {
+    console.log('Running');
+})
 module.exports = app;
