@@ -1,10 +1,10 @@
 module.exports = {
     sum: function (req, res) {
 
-        var num1 = req.query("num1");
-        var num2 = req.query("num2");
-
-        var result = num1+num2;
+        var num1 = req.query.num1;
+        var num2 = req.query.num2;
+        //Parseamos las variables a Number.
+        var result = Number(num1)+Number(num2);
 
         res.status(201).send({
             operation: "Add",
@@ -14,10 +14,10 @@ module.exports = {
 
     substract: function (req, res) {
 
-        var num1 = req.query("num1");
-        var num2 = req.query("num2");
-
-        var result = num1-num2;
+        var num1 = req.query.num1;
+        var num2 = req.query.num2;
+        //Parseamos las variables a Number.
+        var result = Number(num1)-Number(num2);
 
         res.status(201).send({
             operation: "Substract",
@@ -27,10 +27,10 @@ module.exports = {
     },
 
     multiply: function (req, res) {
-        var num1 = req.query("num1");
-        var num2 = req.query("num2");
-
-        var result = num1*num2;
+        var num1 = req.query.num1;
+        var num2 = req.query.num2;
+        //Parseamos las variables a Number.
+        var result = Number(num1)*Number(num2);
 
         res.status(201).send({
             operation: "Multiply",
@@ -40,10 +40,10 @@ module.exports = {
 
     divide: function (req, res) {
 
-        var num1 = req.query("num1");
-        var num2 = req.query("num2");
-        
-        var result;
+        var num1 = req.query.num1;
+        var num2 = req.query.num2;
+        //Parseamos las variables a Number.
+        var result = Number(num1)/Number(num2);
         
         (num1>0) ? result = num1/num2 : result ="No se puede dividir entre 0";
         

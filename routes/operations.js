@@ -1,15 +1,11 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var tasksController = require('../controllers/tasks.controller');
-var middleware = require('../middleware');
+var operationsController = require("../controllers/operations.controller");
 
+router.get("/sum", operationsController.sum);
+router.get("/substract", operationsController.substract);
+router.get("/multiply", operationsController.multiply);
+router.get("/divide", operationsController.divide);
 
-router.get('/:id', tasksController.getById);
-
-router.use(middleware);
-
-router
-    .post('/', tasksController.create)
-    .get('/', tasksController.getAll);
 
 module.exports = router;
