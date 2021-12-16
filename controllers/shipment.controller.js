@@ -27,7 +27,7 @@ module.exports = {
         try {
             //Debera de retornar una dirección random
             // codigo de respuesta 201
-            // data la direcciòn random
+            // data la direcciòn random.
             var direccion = faker.address.direction();
 
             res.status(201).json({

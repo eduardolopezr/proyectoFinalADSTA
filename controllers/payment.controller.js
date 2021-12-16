@@ -56,7 +56,7 @@ module.exports = {
 
     getPromos: function (req, res) {
         try {
-           //Cambiamos el req por una variable para retornar como respuesta.
+           //Cambiamos el req por una variable para retornar como respuesta
             var response = [
                 { name: "BUENFIN" },
                 { name: "HOTSALE" },
@@ -70,5 +70,5 @@ module.exports = {
             Sentry.captureMessage("Something went wrong");
         }
         
-    },
+    }, 
 };
