@@ -6,51 +6,69 @@ const LINE_ENDING = require("os").EOL;
 
 module.exports = {
     create: function (req, res) {
-        var price = faker.commerce.price();
+        try {
+            var price = faker.commerce.price();
 
-        //la función toma el path del txt y el flags a (append)
-        var stream = fs.createWriteStream(PAYMENT_FILE_PATH, { flags: "a" });
-        //Escribimos en el archivo.
-        stream.write(price + LINE_ENDING);
-        stream.end();
+            //la función toma el path del txt y el flags a (append)
+            var stream = fs.createWriteStream(PAYMENT_FILE_PATH, { flags: "a" });
+            //Escribimos en el archivo.
+            stream.write(price + LINE_ENDING);
+            stream.end();
+    
+            res.status(201).send({price: price });
+        } catch (e) {
+            Sentry.captureException(e);
+            Sentry.captureMessage("Something went wrong");
+        }
 
-        res.status(201).send({price: price });
     },
 
     applyDiscount: function (req, res) {
-        //debera de restar una cantidad a cada precio en payment-generated.txt
-        var { qyt } = req.body;
-        //Obtenemos los datos del archivo
-        var data = fs.readFileSync(PAYMENT_FILE_PATH);
-        var arrayOfPrices = data.toString().trim().split(LINE_ENDING);
-
-        var jsonRes = [];
-        var wTexto = "";
-
-        //creamos nuevos datos.
-        arrayOfPrices.forEach((item) => {
-            var aPrecio = Number(item) - Number(qyt);
-            jsonRes.push((Object.price = aPrecio));
-            wTexto += aPrecio + LINE_ENDING;
-        });
+        try {
+                //debera de restar una cantidad a cada precio en payment-generated.txt
+                var { qyt } = req.body;
+                //Obtenemos los datos del archivo
+                var data = fs.readFileSync(PAYMENT_FILE_PATH);
+                var arrayOfPrices = data.toString().trim().split(LINE_ENDING);
         
-        //la función toma el path del txt y el flags w (write)
-        var stream = fs.createWriteStream(PAYMENT_FILE_PATH, { flags: "w" });
-        stream.write(wTexto);
-        stream.end();
+                var jsonRes = [];
+                var wTexto = "";
+        
+                //creamos nuevos datos.
+                arrayOfPrices.forEach((item) => {
+                    var aPrecio = Number(item) - Number(qyt);
+                    jsonRes.push((Object.price = aPrecio));
+                    wTexto += aPrecio + LINE_ENDING;
+                });
+                
+                //la función toma el path del txt y el flags w (write)
+                var stream = fs.createWriteStream(PAYMENT_FILE_PATH, { flags: "w" });
+                stream.write(wTexto);
+                stream.end();
+        
+                res.json({ message: "Se modificó el archivo.", resData: jsonRes });
+        } catch (e) {
+            Sentry.captureException(e);
+            Sentry.captureMessage("Something went wrong");
+        }
 
-        res.json({ message: "Se modificó el archivo.", resData: jsonRes });
     },
 
     getPromos: function (req, res) {
-        //Cambiamos el req por una variable para retornar como respuesta.
-        var response = [
-            { name: "BUENFIN" },
-            { name: "HOTSALE" },
-            { name: "CYBERMONDAY" },
-            { name: "BLACKFRIDAY" },
-            { name: "PRIMEDAY" },
-        ];
+        try {
+           //Cambiamos el req por una variable para retornar como respuesta.
+            var response = [
+                { name: "BUENFIN" },
+                { name: "HOTSALE" },
+                { name: "CYBERMONDAY" },
+                { name: "BLACKFRIDAY" },
+                { name: "PRIMEDAY" },
+            ];
         res.json(response);
+        } catch (e) {
+            Sentry.captureException(e);
+            Sentry.captureMessage("Something went wrong");
+        }
+        
     },
 };
